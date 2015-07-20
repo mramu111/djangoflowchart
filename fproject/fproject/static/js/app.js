@@ -22,7 +22,7 @@ angular.module('app', ['flowChart', ])
 //
 // Application controller.
 //
-.controller('AppCtrl', ['$scope', 'prompt', function AppCtrl ($scope, prompt) {
+.controller('AppCtrl', ['$scope', '$http', 'prompt', function AppCtrl ($scope, $http, prompt) {
 
 	//
 	// Code for the delete key.
@@ -53,10 +53,24 @@ angular.module('app', ['flowChart', ])
 	// Selects the next node id.
 	//
 	var nextNodeID = 10;
-
+    var number=34;
 	//
 	// Setup the data-model for the chart.
 	//
+
+
+   // res=$http.get('/fl/get_numbers/');
+    //res=$http.get('/fl/');
+    //$http.get('/fl/index')
+     //   .success(function(response) {
+            
+     //        $scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+            
+     //       //$scope.names = response.records;
+            
+            
+      //      });
+
 	var chartDataModel = {nodes: [{name: "Switch1",id: 0,x: 0,y: 0,	width: 150,
     inputConnectors: [	{name: "P1",},{name: "B",},{name: "C",},],
                    outputConnectors: [{name: "A",},{name: "B",},{name: "C",},],	
@@ -70,6 +84,26 @@ angular.module('app', ['flowChart', ])
                dest: {nodeID: 1,connectorIndex: 2,},},
 			{name:'c2',	source: {nodeID: 0,connectorIndex: 0,},
 			dest: {	nodeID: 1,connectorIndex: 0,},},]};
+
+
+
+    //res=$http.get('/fl/get_numbers/');
+    //res=$http.get('/fl/');
+    $http.get('/fl/index1/')
+        .success(function(response) {
+           //alert (response);
+           //console.log(response);
+            
+            //$scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+
+            $scope.chartViewModel = new flowchart.ChartViewModel(response);
+            
+            //$scope.names = response.records;
+            
+            
+            });
+
+
 
 	//
 	// Event handler for key-down on the flowchart.
@@ -208,6 +242,8 @@ angular.module('app', ['flowChart', ])
 	//
 	// Create the view-model for the chart and attach to the scope.
 	//
-	$scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+//	$scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
 }])
 ;
+
+
