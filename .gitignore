@@ -16,7 +16,7 @@
 
 #virtualenv cruft
 bin
-lib
+#lib
 include
 bootstrap.py
 develop-eggs
